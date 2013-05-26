@@ -40,8 +40,8 @@ class Puerta
         $error=$status==-3?'Usuario o password incorrectos':'';
         $cuerpo=<<<html
 <div id="contenedor">
-<div>$error</div>
-<div>
+<div id="error_login">$error</div>
+<div class="bloque_horizontal">
 <form method="post" action="$este">
 <input type="text" name="username" value="$username" /><br />
 <input type="password" name="password" /><br />

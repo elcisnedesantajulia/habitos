@@ -28,6 +28,7 @@ if($adentro)
             $link_no="<a href=\"$este?n=$id_cumplimiento\">NO</a>";
             $vencidos.=<<<html
 <p>$dia <span title="$descripcion">$habito</span>: $link_si $link_no</p>
+
 html;
         }
         $vencidos.="</div>\n";
@@ -51,9 +52,8 @@ html;
     $cuerpo=<<<html
 <div id="contenedor">
 <div id="info_usuario">$usuario | <a href="$este?accion=salir">Salir</a></div>
-<hr />
-$vencidos
-$tabla_estadisticas
+<div class="bloque_horizontal">$vencidos</div>
+<div class="bloque_horizontal">$tabla_estadisticas</div>
 </div>
 html;
     $pagina->agregarTitle($titulo);

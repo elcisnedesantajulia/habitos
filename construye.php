@@ -11,7 +11,7 @@ $puerta=new Puerta($dsn,$nombre_sesion);
 $adentro=$puerta->abrir($usuario);
 if($adentro)
 {
-    $pagina=new Pagina();
+    $pagina=new Pagina(null,true);
     $pagina->agregarCss($archivo_css);
 }
 ?>
