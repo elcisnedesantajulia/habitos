@@ -11,6 +11,50 @@ class Habitos
         $this->_mysqli=new mysqli($servido_db,$usuario_db,$passwd_db,$nombre_db);
     }
 
+    public function estadisticas()
+    {
+        $username=$this->_username;
+        $consulta=<<<sql
+SELECT dia,AVG(cumplido) AS promedio,COUNT(*) AS total
+FROM cumplimientos
+INNER JOIN habitos USING(id_habito)
+WHERE dia<=NOW()
+AND visible
+AND username='$username'
+AND cumplido IS NOT NULL
+GROUP BY dia
+ORDER BY dia desc
+sql;
+        if($res=$this->_mysqli->query($consulta))
+        {
+            while($esta_fila=$res->fetch_assoc())
+            {
+                $arr_estadisticas[]=$esta_fila;
+            }
+            if(count($arr_estadisticas))
+            {
+                return $arr_estadisticas;
+            }
+        }
+        return false;
+    }
+
+    public function cumple($id_cumplimiento,$cumplido=1)
+    {
+        $username=$this->_username;
+        $consulta=<<<sql
+UPDATE cumplimientos
+SET cumplido=$cumplido
+WHERE id_cumplimiento=$id_cumplimiento 
+AND cumplido IS NULL
+AND id_habito IN
+(SELECT id_habito
+FROM habitos
+WHERE username='$username')
+sql;
+        $this->_mysqli->query($consulta);
+    }
+
     public function obtieneVencidos()
     {
         $username=$this->_username;

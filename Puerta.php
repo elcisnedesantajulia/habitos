@@ -39,13 +39,15 @@ class Puerta
         global $archivo_css,$este;
         $error=$status==-3?'Usuario o password incorrectos':'';
         $cuerpo=<<<html
+<div id="contenedor">
 <div>$error</div>
 <div>
 <form method="post" action="$este">
-<input type="text" name="username" value="$username" />
-<input type="password" name="password" />
+<input type="text" name="username" value="$username" /><br />
+<input type="password" name="password" /><br />
 <input type="submit" value="Ingresar" />
 </form>
+</div>
 </div>
 html;
         $pagina=new Pagina('Login',true);
@@ -71,6 +73,8 @@ INSERT INTO visitas
 VALUES
 (NOW(),'$username')
 sql;
+        $habitos=new Habitos($username);
+        $habitos->creaCumplimientos();
     }
 }
 ?>
