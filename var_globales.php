@@ -6,4 +6,5 @@ $nombre_db="habitos";
 //$passwd_db=""; //var_auth.php
 $archivo_css='estilo.css';
 $este=$_SERVER["PHP_SELF"];
+$dias_cache=30;
 ?>

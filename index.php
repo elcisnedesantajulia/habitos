@@ -4,6 +4,10 @@ $titulo='Home';
 
 if($adentro)
 {
+    $habitos=new Habitos($usuario);
+    $vencidos=$habitos->obtieneVencidos();
+    print_r($vencidos);
+
     $cuerpo=<<<html
 <div>$usuario</div>
 <div><a href="$este?accion=salir">Salir</a></div>
